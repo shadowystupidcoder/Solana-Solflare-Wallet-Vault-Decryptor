@@ -24,23 +24,45 @@ import bs58 from 'bs58';
 // then decrypt as follows, Solflare uses 100,000 iterations instead of 10,000:
 
 const password = "dF3bGD8iqVcrJJQpS6fEsVgg9iKeNHGCCEhK2C2cGYRm2dx8xeFU1wKbkBsCWdefaz82KeyfbBf8Pfkpm4C56cc6"
-const data = {"encrypted":"9K5j1E3QpmF7UY3v1UKrARko7qPV7TyamuGoQ.....", "kdf":"pbkdf2","nonce":"ANmAvaghvjbc2P29nbbQBiG51aJUjQfdV", "salt":"8gKXzUD5TpgsUrC8Q6ngbP"}
+const data = {
+  "encrypted": "9K5j1E3QpmF7UY3v1UKrARko7qPV7TyamuGoQ.....",
+  "kdf": "pbkdf2",
+  "nonce": "ANmAvaghvjbc2P29nbbQBiG51aJUjQfdV",
+  "salt": "8gKXzUD5TpgsUrC8Q6ngbP"
+}
 const salt = bs58.decode(data.salt);
 const nonce = bs58.decode(data.nonce);
 const encrypted = bs58.decode(data.encrypted);
 const key = await deriveEncryptionKey(password, salt);
 const plaintext = nacl.secretbox.open(encrypted, nonce, key);
 let decoded = null
-try {
-decoded = Buffer.from(plaintext).toString();
-} catch { console.log("invalid vault data") }
-if (!decoded) { console.log("incorrect vault password") }
-if (decoded) {
-const parsed = JSON.parse(decoded)
-console.log(parsed) }
+try
+{
+  decoded = Buffer.from(plaintext).toString();
+}
+catch
+{
+  console.log("invalid vault data")
+}
+if (!decoded)
+{
+  console.log("incorrect vault password")
+}
+if (decoded)
+{
+  const parsed = JSON.parse(decoded)
+  console.log(parsed)
+}
 
 
-async function deriveEncryptionKey(password, salt) {
-try { return new Promise((resolve, reject) => pbkdf2(
-password, salt, 100000, 32, "sha256",
-(err, key) => (err ? reject(err) : resolve(key))))} catch {} }
+async function deriveEncryptionKey(password, salt)
+{
+  try
+  {
+    return new Promise((resolve, reject) => pbkdf2(
+      password, salt, 100000, 32, "sha256",
+      (err, key) => (err ? reject(err) : resolve(key))))
+  }
+  catch
+  {}
+}
