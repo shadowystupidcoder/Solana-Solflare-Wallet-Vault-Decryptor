@@ -1,8 +1,9 @@
-**Solana Solflare Wallet Vault Decryptor**
+**Solana Solflare Wallet Vault Decryptor**  
+
 To find your encrypted Solflare password on Windows navigate to:  
 
-*~\AppData\Local\BraveSoftware\Brave-Browser\User Data\Default\Local Storage\leveldb\*  
-*~\AppData\Local\Microsoft\Edge\User Data\Default\Local Storage\leveldb\*  
+*\AppData\Local\BraveSoftware\Brave-Browser\User Data\Default\Local Storage\leveldb\*  
+*\AppData\Local\Microsoft\Edge\User Data\Default\Local Storage\leveldb\*  
 *...etc*  
 
 and control + f for: "Xxpass" in all of the .ldb files (open in a an editor or notepad++). The string you find here will be the encrypted password, ie:  
