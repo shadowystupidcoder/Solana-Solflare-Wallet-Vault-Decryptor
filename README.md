@@ -19,3 +19,6 @@ Then decrypt.
 
 
 Any questions add me on Discord.  
+
+
+*To decrypt a Phantom vault - https://github.com/shadowystupidcoder/Solana-Phantom-Wallet-Vault-Decryptor*
